@@ -1,4 +1,4 @@
-with open("tmp/whoneeds.txt", "r") as f:
+with open("whoneeds.txt", "r") as f:
     lines = f.readlines()
 
 # Create an empty set to store the values
