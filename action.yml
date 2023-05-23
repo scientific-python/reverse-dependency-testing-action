@@ -1,0 +1,23 @@
+name: Reverse dependency testing
+description: A GitHub Action to run tests of downstream packages
+permissions:
+  actions: read
+  contents: read
+  metadata: read
+author: "Scientific-Python"
+version: "1.0.0"
+
+inputs:
+  package_name:
+    description: 'Upstream package name used to create reverse dependency tree.'
+    required: true
+  excluded:
+    description: 'List of packages to be excluded from testing.'
+    required: false
+  included:
+    description: Whitelist of packages to be included in testing. When specified, `excluded` is ignored.'
+    required: false
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
