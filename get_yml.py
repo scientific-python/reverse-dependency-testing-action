@@ -23,7 +23,7 @@ yml = [
 ]
 yml.extend(values)
 
-print("Dependency tree analysis created a following environment specification:")
+print("Dependency tree analysis created a following environment specification:\n")
 print(*yml)
 
 with open("reverse.yml", "w") as f:

@@ -11,8 +11,8 @@ set -x
 
 cd /tmp
 
-micromamba repoquery whoneeds $INPUT_PACKAGE_NAME -c conda-forge > whoneeds.txt
-# micromamba repoquery whoneeds libpysal -c conda-forge > whoneeds.txt
+# micromamba repoquery whoneeds $INPUT_PACKAGE_NAME -c conda-forge > whoneeds.txt
+micromamba repoquery whoneeds libpysal -c conda-forge > whoneeds.txt
 
 python get_yml.py
 
