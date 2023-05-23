@@ -9,6 +9,8 @@ set -e
 # enable trace mode (print what it does)
 set -x
 
+cd ..
+
 # micromamba repoquery whoneeds $INPUT_PACKAGE_NAME -c conda-forge > whoneeds.txt
 micromamba repoquery whoneeds libpysal -c conda-forge > whoneeds.txt
 
