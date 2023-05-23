@@ -4,7 +4,7 @@ with open("whoneeds.txt", "r") as f:
     lines = f.readlines()
 
 # Create an empty set to store the values
-values = set()
+packages = set()
 
 excluded = os.getenv("INPUT_EXCLUDED").split(",")
 
@@ -15,7 +15,7 @@ for line in lines[:-1]:
         # Split the line by whitespace characters
         package = line.split()[0]
         if package not in excluded:
-            values.add("  - " + package + "\n")
+            packages.add(package)
     if line.startswith("────────────"):
         use = True
 
@@ -24,8 +24,9 @@ yml = [
     "channels:\n",
     "  - conda-forge\n",
     "dependencies:\n",
+    "  - pytest\n",
 ]
-yml.extend(values)
+yml.extend(["  - " + package + "\n" for package in packages])
 
 print("Dependency tree analysis created a following environment specification:\n")
 print(*yml)
@@ -34,3 +35,5 @@ with open("reverse.yaml", "w") as f:
     f.writelines(yml)
 
 print("YAML saved to reverse.yaml\n")
+
+os.environ["TEST_PACKAGES"] = str(packages)[1:-1]
