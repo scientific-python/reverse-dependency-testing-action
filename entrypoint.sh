@@ -9,12 +9,14 @@ set -e
 # enable trace mode (print what it does)
 set -x
 
-micromamba repoquery whoneeds $INPUT_PACKAGE_NAME -c conda-forge > whoneeds.txt
-# micromamba repoquery whoneeds libpysal -c conda-forge > whoneeds.txt
+# micromamba repoquery whoneeds $INPUT_PACKAGE_NAME -c conda-forge > whoneeds.txt
+micromamba repoquery whoneeds libpysal -c conda-forge > whoneeds.txt
 
 micromamba install -y -n base python -c conda-forge
 eval "$(micromamba shell hook --shell=bash)"
 micromamba activate base
+
+ls .
 
 python get_yml.py
 
