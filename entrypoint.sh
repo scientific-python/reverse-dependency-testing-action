@@ -25,4 +25,8 @@ python get_yml.py
 
 micromamba create -f reverse.yml
 
-micromamba activate reverse
+micromamba activate reverse-test
+
+cd $GITHUB_WORKSPACE
+
+pip install .
