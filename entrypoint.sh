@@ -18,7 +18,7 @@ python get_yml.py
 
 micromamba create -f reverse.yml
 
-printenv
+eval "$(micromamba shell hook --shell=bash)"
 
 micromamba activate reverse-test
 
