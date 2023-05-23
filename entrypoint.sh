@@ -20,4 +20,6 @@ micromamba install -y -n base -f reverse.yaml
 
 cd $GITHUB_WORKSPACE
 
-pip install .
+ls 
+
+eval $INPUT_INSTALLATION_COMMAND
