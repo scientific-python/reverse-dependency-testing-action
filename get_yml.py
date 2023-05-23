@@ -16,7 +16,7 @@ for line in lines[:-1]:
         use = True
 
 yml = [
-    "name: reverse-test\n",
+    "name: base\n",
     "channels:\n",
     "  - conda-forge\n",
     "dependencies:\n",
@@ -26,7 +26,7 @@ yml.extend(values)
 print("Dependency tree analysis created a following environment specification:\n")
 print(*yml)
 
-with open("reverse.yml", "w") as f:
+with open("reverse.yaml", "w") as f:
     f.writelines(yml)
 
-print("YML saved to reverse.yml")
+print("YAML saved to reverse.yaml\n")

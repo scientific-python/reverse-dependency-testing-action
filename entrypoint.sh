@@ -16,11 +16,7 @@ micromamba repoquery whoneeds libpysal -c conda-forge > whoneeds.txt
 
 python get_yml.py
 
-micromamba create -f reverse.yml
-
-eval "$(micromamba shell hook --shell=bash)"
-
-micromamba activate reverse-test
+micromamba micromamba install -y -n base -f reverse.yaml
 
 cd $GITHUB_WORKSPACE
 
