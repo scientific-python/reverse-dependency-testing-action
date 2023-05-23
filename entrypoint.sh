@@ -14,10 +14,6 @@ cd /tmp
 micromamba repoquery whoneeds $INPUT_PACKAGE_NAME -c conda-forge > whoneeds.txt
 # micromamba repoquery whoneeds libpysal -c conda-forge > whoneeds.txt
 
-micromamba install -y -n base python -c conda-forge
-eval "$(micromamba shell hook --shell=bash)"
-micromamba activate base
-
 python get_yml.py
 
 micromamba create -f reverse.yml
