@@ -1,3 +1,5 @@
+import os
+
 with open("whoneeds.txt", "r") as f:
     lines = f.readlines()
 
@@ -9,9 +11,9 @@ use = False
 for line in lines[:-1]:
     if use:
         # Split the line by whitespace characters
-        columns = line.split()
-        # Add the first column value to the set
-        values.add("  - " + columns[0] + "\n")
+        package = line.split()[0]
+        if package not in os.getenv("INPUT_EXCLUDE"):
+            values.add("  - " + package + "\n")
     if line.startswith("────────────"):
         use = True
 
