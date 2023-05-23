@@ -36,4 +36,5 @@ with open("reverse.yaml", "w") as f:
 
 print("YAML saved to reverse.yaml\n")
 
-os.environ["TEST_PACKAGES"] = str(packages)[1:-1]
+with open("packages.txt", "w") as f:
+    f.writelines(list(packages))
