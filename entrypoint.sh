@@ -16,6 +16,7 @@ micromamba install -y -n base python -c conda-forge
 eval "$(micromamba shell hook --shell=bash)"
 micromamba activate base
 
+pwd
 ls .
 
 python get_yml.py
