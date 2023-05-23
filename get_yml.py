@@ -6,13 +6,15 @@ with open("whoneeds.txt", "r") as f:
 # Create an empty set to store the values
 values = set()
 
+excluded = os.getenv("INPUT_EXCLUDED").split(",")
+
 use = False
 # Loop through each line except the first two and the last one
 for line in lines[:-1]:
     if use:
         # Split the line by whitespace characters
         package = line.split()[0]
-        if package not in os.getenv("INPUT_EXCLUDE"):
+        if package not in excluded:
             values.add("  - " + package + "\n")
     if line.startswith("────────────"):
         use = True
