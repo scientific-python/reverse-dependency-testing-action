@@ -5,8 +5,14 @@ with open("whoneeds.txt", "r") as f:
 
 # Create an empty set to store the values
 packages = set()
+whitelist = False
 
-excluded = os.getenv("INPUT_EXCLUDED").split(",")
+excluded = os.getenv("INPUT_EXCLUDE").split(",")
+included = os.getenv("INPUT_INCLUDE")
+if included != "":
+    included.split(",")
+    whitelist = True
+
 
 use = False
 # Loop through each line except the first two and the last one
@@ -14,8 +20,12 @@ for line in lines[:-1]:
     if use:
         # Split the line by whitespace characters
         package = line.split()[0]
-        if package not in excluded:
-            packages.add(package)
+        if whitelist:
+            if package in included:
+                packages.add(package)
+        else:
+            if package not in excluded:
+                packages.add(package)
     if line.startswith("────────────"):
         use = True
 

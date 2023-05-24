@@ -12,7 +12,6 @@ set -o pipefail
 cd /tmp
 
 micromamba repoquery whoneeds $INPUT_PACKAGE_NAME -c conda-forge > whoneeds.txt
-# micromamba repoquery whoneeds libpysal -c conda-forge > whoneeds.txt
 
 python get_yml.py
 
@@ -27,13 +26,27 @@ cd /tmp
 # Read packages from packages.txt file
 packages=$(cat packages.txt)
 
+declare -A results
+
 # Loop through each package and run pytest with pyargs option
 for package in $packages
 do
-    cat << EOF
+    echo -e "\nRunning pytest for $package\n"
 
-Running pytest for $package
-
-EOF
     pytest --color yes --tb=no --disable-warnings -n auto --pyargs $package
+
+    # Get the exit code
+    exit_code=$?
+    # Store the exit code in the array with the package name as the key
+    results[$package]=$exit_code
+
+done
+
+# Print the summary
+echo -e "\nSummary:"
+# Loop through the array
+for package in "${!results[@]}"
+do
+    # Print the package name and the exit code
+    echo "$package: ${results[$package]}"
 done
