@@ -5,7 +5,7 @@ set -u
 # Prevent pipe errors to be silenced
 set -o pipefail
 # Exit if any command exit as non-zero
-# set -e
+set -e
 # enable trace mode (print what it does)
 # set -x
 
@@ -16,11 +16,6 @@ micromamba repoquery whoneeds $INPUT_PACKAGE_NAME -c conda-forge > whoneeds.txt
 python get_yml.py
 
 micromamba install -y -n base -f reverse.yaml
-
-install_exit_code=$?
-if [ $install_exit_code -eq 1 ]; then
-  exit 1
-fi
 
 # Read packages from packages.txt file
 packages=$(cat packages.txt)
@@ -38,6 +33,8 @@ total=${#packages_array[@]}
 passed=""
 failed=""
 no_tests=""
+
+set +e
 
 # Loop through each package and run pytest with pyargs option
 for package in $packages
