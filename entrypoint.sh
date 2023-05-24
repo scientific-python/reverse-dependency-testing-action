@@ -11,6 +11,8 @@ set -e
 
 cd /tmp
 
+sudo apt install build-essential
+
 micromamba repoquery whoneeds $INPUT_PACKAGE_NAME -c conda-forge > whoneeds.txt
 
 # check if INPUT_INSTALL env variable is .yml or .yaml
