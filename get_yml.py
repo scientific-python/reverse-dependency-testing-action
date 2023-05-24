@@ -31,6 +31,9 @@ for line in lines[:-1]:
     if line.startswith("────────────"):
         use = True
 
+# cast to list
+packages = list(packages)
+
 # add additional packages to be tested
 additional = os.getenv("INPUT_ADDITIONAL")
 if additional != "":
