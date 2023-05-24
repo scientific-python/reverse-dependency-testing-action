@@ -26,6 +26,10 @@ cd /tmp
 # Read packages from packages.txt file
 packages=$(cat packages.txt)
 
+counter=0
+# Get the total number of packages
+total=${#packages[@]}
+
 # Declare variables for each category
 passed=""
 failed=""
@@ -34,7 +38,8 @@ no_tests=""
 # Loop through each package and run pytest with pyargs option
 for package in $packages
 do
-    echo -e "\nRunning pytest for $package\n"
+    ((counter++))
+    echo -e "\n$counter/$total: Running pytest for $package\n"
 
     pytest --color yes --tb=no --disable-warnings -n auto --pyargs $package
 
@@ -52,7 +57,7 @@ do
 done
 
 # Print the summary
-echo -e "\nSummary:\n"
-echo "PASSED: $passed"
-echo "FAILED: $failed"
-echo "NO TESTS COLLECTED: $no_tests"
+echo -e "\n\e[35m======================= reverse dependency tests summary =======================\n"
+echo -e "\e[32mPASSED: $passed"
+echo -e "\e[31mFAILED: $failed"
+echo -e "\e[33mNO TESTS COLLECTED: $no_tests"
