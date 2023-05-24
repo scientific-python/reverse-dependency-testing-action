@@ -5,9 +5,9 @@ set -u
 # Prevent pipe errors to be silenced
 set -o pipefail
 # Exit if any command exit as non-zero
-set -e
+# set -e
 # enable trace mode (print what it does)
-set -x
+# set -x
 
 cd /tmp
 
@@ -31,5 +31,5 @@ packages=$(cat packages.txt)
 for package in $packages
 do
     echo "Running pytest for $package"
-    pytest --color yes --tb=no --disable-warnings --pyargs $package || true
+    pytest --color yes --tb=no --disable-warnings --pyargs $package
 done
