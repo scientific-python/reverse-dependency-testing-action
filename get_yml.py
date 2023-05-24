@@ -37,4 +37,4 @@ with open("reverse.yaml", "w") as f:
 print("YAML saved to reverse.yaml\n")
 
 with open("packages.txt", "w") as f:
-    f.writelines([p + "\n" for p in packages])
+    f.writelines(sorted([p + "\n" for p in packages]))
