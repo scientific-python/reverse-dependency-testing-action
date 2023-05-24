@@ -22,27 +22,22 @@ if [ $install_exit_code -eq 1 ]; then
   exit 1
 fi
 
+# Read packages from packages.txt file
+packages=$(cat packages.txt)
+
 cd $GITHUB_WORKSPACE
 
 eval $INPUT_INSTALLATION_COMMAND
-
-cd /tmp
-
-# Read packages from packages.txt file
-packages=$(cat packages.txt)
 
 counter=0
 packages_array=($packages)
 # Get the length of the array
 total=${#packages_array[@]}
 
-
 # Declare variables for each category
 passed=""
 failed=""
 no_tests=""
-
-cd $GITHUB_WORKSPACE
 
 # Loop through each package and run pytest with pyargs option
 for package in $packages
