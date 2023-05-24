@@ -31,5 +31,5 @@ packages=$(cat packages.txt)
 for package in $packages
 do
     echo "Running pytest for $package"
-    pytest --color yes --tb=no --pyargs $package || true
+    pytest --color yes --tb=no --disable-warnings --pyargs $package || true
 done
