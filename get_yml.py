@@ -25,6 +25,7 @@ yml = [
     "  - conda-forge\n",
     "dependencies:\n",
     "  - pytest\n",
+    "  - pytest-xdist\n",
 ]
 yml.extend(["  - " + package + "\n" for package in packages])
 

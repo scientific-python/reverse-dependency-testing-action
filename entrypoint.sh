@@ -9,20 +9,20 @@ set -o pipefail
 # enable trace mode (print what it does)
 # set -x
 
-cd /tmp
+# cd /tmp
 
-micromamba repoquery whoneeds $INPUT_PACKAGE_NAME -c conda-forge > whoneeds.txt
-# micromamba repoquery whoneeds libpysal -c conda-forge > whoneeds.txt
+# micromamba repoquery whoneeds $INPUT_PACKAGE_NAME -c conda-forge > whoneeds.txt
+# # micromamba repoquery whoneeds libpysal -c conda-forge > whoneeds.txt
 
-python get_yml.py
+# python get_yml.py
 
-micromamba install -y -n base -f reverse.yaml
+# micromamba install -y -n base -f reverse.yaml
 
-cd $GITHUB_WORKSPACE
+# cd $GITHUB_WORKSPACE
 
-eval $INPUT_INSTALLATION_COMMAND
+# eval $INPUT_INSTALLATION_COMMAND
 
-cd /tmp
+# cd /tmp
 
 # Read packages from packages.txt file
 packages=$(cat packages.txt)
@@ -30,6 +30,10 @@ packages=$(cat packages.txt)
 # Loop through each package and run pytest with pyargs option
 for package in $packages
 do
-    echo "Running pytest for $package"
-    pytest --color yes --tb=no --disable-warnings --pyargs $package
+    cat << EOF
+
+Running pytest for $package
+
+EOF
+    pytest --color yes --tb=no --disable-warnings -n auto --pyargs $package
 done
