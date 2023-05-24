@@ -16,7 +16,7 @@ eval $INPUT_RUN
 # check if INPUT_INSTALL env variable is .yml or .yaml
 if [[ -n "$INPUT_ENV" ]]; then
   # run micromamba install command
-  micromamba install -y -n base -f "$INPUT_INSTALL"
+  micromamba install -y -n base -f "$INPUT_ENV"
 fi
 
 cd /tmp
