@@ -9,6 +9,8 @@ set -e
 # enable trace mode (print what it does)
 # set -x
 
+micromamba install -y -n base python=$INPUT_PYTHON_VERSION git -c conda-forge
+
 eval $INPUT_RUN
 
 # check if INPUT_INSTALL env variable is .yml or .yaml
