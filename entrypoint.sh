@@ -42,6 +42,8 @@ passed=""
 failed=""
 no_tests=""
 
+cd $GITHUB_WORKSPACE
+
 # Loop through each package and run pytest with pyargs option
 for package in $packages
 do
