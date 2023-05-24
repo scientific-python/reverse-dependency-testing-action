@@ -20,10 +20,16 @@ micromamba install -y -n base -f reverse.yaml
 
 cd $GITHUB_WORKSPACE
 
-ls
-
 eval $INPUT_INSTALLATION_COMMAND
 
 cd /tmp
 
-python run_tests.py
+# Read packages from packages.txt file
+packages=$(cat packages.txt)
+
+# Loop through each package and run pytest with pyargs option
+for package in $packages
+do
+    echo "\nRunning pytest for $package \n"
+    pytest --pyargs $package
+done
