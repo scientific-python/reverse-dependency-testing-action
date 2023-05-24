@@ -35,6 +35,11 @@ inputs:
     description: A command used to install the package from the repository
     required: false
     default: pip install .
+  fail_on_failure:
+    description: |
+      Fail the action if there is a failure in any of the tests.
+    required: false
+    default: "true"
 
 runs:
   using: "docker"

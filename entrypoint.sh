@@ -41,9 +41,9 @@ no_tests=""
 for package in $packages
 do
     ((counter++))
-    echo -e "\e[93m================================================================================"
+    echo -e "\n\e[95m================================================================================"
     echo -e "$counter/$total: Running pytest for $package"
-    echo -e "\e[93m================================================================================"
+    echo -e "\e[95m================================================================================\n"
 
     pytest --color yes --tb=no --disable-warnings -n auto --pyargs $package
 
@@ -51,11 +51,11 @@ do
     exit_code=$?
 
     if [ $exit_code -eq 0 ]; then
-        passed+="$package "
+        passed+="$package, "
     elif [ $exit_code -eq 1 ]; then
-        failed+="$package "
+        failed+="$package, "
     elif [ $exit_code -eq 5 ]; then
-        no_tests+="$package "
+        no_tests+="$package, "
     fi
 
 done
@@ -64,4 +64,13 @@ done
 echo -e "\n\e[1m\e[35m======================= reverse dependency tests summary =======================\n"
 echo -e "\e[32mPASSED: \e[0m$passed"
 echo -e "\e[31mFAILED: \e[0m$failed"
-echo -e "\e[33mNO TESTS COLLECTED:\e[0m$no_tests"
+echo -e "\e[33mNO TESTS COLLECTED: \e[0m$no_tests"
+
+# check if failed is not empty and FAIL is true
+if [[ -n "$failed" && "$INPUT_FAIL_ON_FAILURE" == "true" ]]; then
+  # return an error exit code
+  exit 1
+else
+  # pass
+  exit 0
+fi

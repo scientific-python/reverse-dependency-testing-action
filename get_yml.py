@@ -1,20 +1,27 @@
 import os
 
+# open the output of repoquery
 with open("whoneeds.txt", "r") as f:
     lines = f.readlines()
 
 # Create an empty set to store the values
 packages = set()
+
+# track if we have whitelist
 whitelist = False
 
+# get blacklisted packages
 excluded = os.getenv("INPUT_EXCLUDE").split(",")
+
+# get whitelisted packages
 included = os.getenv("INPUT_INCLUDE")
 if included != "":
     included.split(",")
     whitelist = True
 
-
+# track if we can parse the line
 use = False
+
 # Loop through each line except the first two and the last one
 for line in lines[:-1]:
     if use:
