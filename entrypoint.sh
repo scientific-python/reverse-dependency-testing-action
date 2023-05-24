@@ -27,6 +27,8 @@ python get_yml.py
 
 micromamba install -y -n base -f reverse.yaml
 
+micromamba list
+
 # Read packages from packages.txt file
 packages=$(cat packages.txt)
 
