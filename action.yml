@@ -44,7 +44,9 @@ inputs:
       Fail the action if there is a failure in any of the tests.
     required: false
     default: "true"
-
+  run:
+    description: Command to run prior doing anything else within the micromamba docker.
+    required: false
 runs:
   using: "docker"
   image: "Dockerfile"

@@ -9,9 +9,9 @@ set -e
 # enable trace mode (print what it does)
 # set -x
 
-cd /tmp
+eval $INPUT_RUN
 
-sudo apt install build-essential
+cd /tmp
 
 micromamba repoquery whoneeds $INPUT_PACKAGE_NAME -c conda-forge > whoneeds.txt
 
@@ -68,7 +68,7 @@ do
 done
 
 # Print the summary
-echo -e "\n\e[1m\e[35m======================= reverse dependency tests summary =======================\n"
+echo -e "\n\e[1m\e[35m======================= reverse dependency tests summary ======================="
 echo -e "\e[32mPASSED: \e[0m${passed%, }"
 echo -e "\e[31mFAILED: \e[0m${failed%, }"
 echo -e "\e[33mNO TESTS COLLECTED: \e[0m${no_tests%, }"
