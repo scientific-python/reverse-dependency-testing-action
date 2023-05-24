@@ -17,6 +17,11 @@ python get_yml.py
 
 micromamba install -y -n base -f reverse.yaml
 
+install_exit_code=$?
+if [ $install_exit_code -eq 1 ]; then
+  exit 1
+fi
+
 cd $GITHUB_WORKSPACE
 
 eval $INPUT_INSTALLATION_COMMAND
