@@ -30,6 +30,6 @@ packages=$(cat packages.txt)
 # Loop through each package and run pytest with pyargs option
 for package in $packages
 do
-    echo "\nRunning pytest for $package \n"
-    pytest --pyargs $package || true
+    echo "Running pytest for $package"
+    pytest --color yes --tb=no --pyargs $package || true
 done
