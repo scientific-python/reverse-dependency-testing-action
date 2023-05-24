@@ -41,7 +41,9 @@ no_tests=""
 for package in $packages
 do
     ((counter++))
-    echo -e "\n$counter/$total: Running pytest for $package\n"
+    echo -e "\e[93m================================================================================"
+    echo -e "$counter/$total: Running pytest for $package"
+    echo -e "\e[93m================================================================================"
 
     pytest --color yes --tb=no --disable-warnings -n auto --pyargs $package
 
@@ -59,7 +61,7 @@ do
 done
 
 # Print the summary
-echo -e "\n\e[35m======================= reverse dependency tests summary =======================\n"
-echo -e "\e[32mPASSED: $passed"
-echo -e "\e[31mFAILED: $failed"
-echo -e "\e[33mNO TESTS COLLECTED: $no_tests"
+echo -e "\n\e[1m\e[35m======================= reverse dependency tests summary =======================\n"
+echo -e "\e[32mPASSED: \e[0m$passed"
+echo -e "\e[31mFAILED: \e[0m$failed"
+echo -e "\e[33mNO TESTS COLLECTED:\e[0m$no_tests"

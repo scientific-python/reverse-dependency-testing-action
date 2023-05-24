@@ -15,7 +15,21 @@ inputs:
     description: "List of packages to be excluded from testing."
     required: false
   include:
-    description: Whitelist of packages to be included in testing. When specified, `excluded` is ignored.'
+    description: |
+      Whitelist of packages to be included in testing.
+      When specified, `excluded` is ignored.'
+      The resulting set of packages to be tested is an overlap between those
+      in the dependency tree and those defined in `include`. If you want to
+      define additional packages, use `additional`.
+    required: false
+  additional:
+    description: A list of additional packages not in the dependency tree to be tested.
+    required: false
+  install:
+    description: |
+      Additional packages to be installed to the environment.
+      (must be avaialble on conda-forge). These are not tested unless they are
+      in the dependency tree anyway.
     required: false
   installation_command:
     description: A command used to install the package from the repository

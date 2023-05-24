@@ -26,8 +26,15 @@ for line in lines[:-1]:
         else:
             if package not in excluded:
                 packages.add(package)
+
+    # start collecting packages after this line in the whoneeds.txt
     if line.startswith("────────────"):
         use = True
+
+# add additional packages to be tested
+additional = os.getenv("INPUT_ADDITIONAL")
+if additional != "":
+    packages.extend(additional.split(","))
 
 yml = [
     "name: base\n",
@@ -38,6 +45,11 @@ yml = [
     "  - pytest-xdist\n",
 ]
 yml.extend(["  - " + package + "\n" for package in packages])
+
+# add additional packages to the env
+install = os.getenv("INPUT_INSTALL")
+if install != "":
+    yml.extend(["  - " + package + "\n" for package in install.split(",")])
 
 print("Dependency tree analysis created a following environment specification:\n")
 print(*yml)
