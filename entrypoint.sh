@@ -26,7 +26,10 @@ cd /tmp
 # Read packages from packages.txt file
 packages=$(cat packages.txt)
 
-declare -A results
+# Declare variables for each category
+passed=""
+failed=""
+no_tests=""
 
 # Loop through each package and run pytest with pyargs option
 for package in $packages
@@ -37,16 +40,19 @@ do
 
     # Get the exit code
     exit_code=$?
-    # Store the exit code in the array with the package name as the key
-    results[$package]=$exit_code
+
+    if [ $exit_code -eq 0 ]; then
+        passed+="$package "
+    elif [ $exit_code -eq 1 ]; then
+        failed+="$package "
+    elif [ $exit_code -eq 5 ]; then
+        no_tests+="$package "
+    fi
 
 done
 
 # Print the summary
-echo -e "\nSummary:"
-# Loop through the array
-for package in "${!results[@]}"
-do
-    # Print the package name and the exit code
-    echo "$package: ${results[$package]}"
-done
+echo -e "\nSummary:\n"
+echo "PASSED: $passed"
+echo "FAILED: $failed"
+echo "NO TESTS COLLECTED: $no_tests"
