@@ -23,13 +23,17 @@ inputs:
       define additional packages, use `additional`.
     required: false
   additional:
-    description: A list of additional packages not in the dependency tree to be tested.
+    description: |
+      A list of additional packages not in the dependency tree to be tested.
+      This is useful to test known downstream packages that have your package as
+      an optional dependency hence will not show up in the dependency tree.
     required: false
   install:
     description: |
       Additional packages to be installed to the environment.
-      (must be avaialble on conda-forge). These are not tested unless they are
-      in the dependency tree anyway.
+      These are not tested unless they are in the dependency tree anyway.
+      You can pass a comma-separated list (e.g. "numpy,pandas,xarray") or
+      a conda environment file.
     required: false
   installation_command:
     description: A command used to install the package from the repository

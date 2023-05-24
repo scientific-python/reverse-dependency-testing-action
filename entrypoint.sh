@@ -13,6 +13,12 @@ cd /tmp
 
 micromamba repoquery whoneeds $INPUT_PACKAGE_NAME -c conda-forge > whoneeds.txt
 
+# check if INPUT_INSTALL env variable is .yml or .yaml
+if [[ "$INPUT_INSTALL" == *.yml || "$INPUT_INSTALL" == *.yaml ]]; then
+  # run micromamba install command
+  micromamba install -y -n base -f "$INPUT_INSTALL"
+fi
+
 python get_yml.py
 
 micromamba install -y -n base -f reverse.yaml
