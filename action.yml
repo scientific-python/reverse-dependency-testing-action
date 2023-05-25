@@ -31,7 +31,7 @@ inputs:
       When specified, `ignore` is not used.
       The resulting set of packages to be tested is an overlap between those
       in the dependency tree and those defined in `whitelist`. If you want to
-      define additional packages, use `additional`.
+      define additional packages, use `include`.
 
       For multiple packages, separate using spaces or use multiline syntax:
 
@@ -67,7 +67,16 @@ inputs:
     description: |
       Additional packages to be installed to the environment.
       These are not tested unless they are in the dependency tree anyway.
-      You can pass a comma-separated list (e.g. "numpy,pandas,xarray").
+
+      For multiple packages, separate using spaces or use multiline syntax:
+
+      ```yml
+      install: package1 package2
+      # or
+      install: >-
+        package1
+        package2
+      ```
     required: false
   installation_command:
     description: A command used to install the package from the repository
