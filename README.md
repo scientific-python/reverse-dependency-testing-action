@@ -153,3 +153,12 @@ pytest --pyargs mypackage
 
 Packaging of tests is useful not only for this action but also to allow users
 to verify that your package is correctly installed in their environment.
+
+## How does the Action work?
+
+The principle is simple:
+
+1. Use `micromamba repoquery whoneeds mypackage -c conda-forge` to fetch the direct dependents of `mypackage` based on the `conda-forge` index.
+2. De-duplicate the list to retrieve unique package names.
+3. Create an environment with all the packages and install `mypackage` from main.
+4. Loop over the package names and run `pytest --pyargs packagename` for each.
