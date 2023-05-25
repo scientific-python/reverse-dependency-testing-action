@@ -5,28 +5,59 @@ permissions:
   contents: read
   metadata: read
 author: "Scientific-Python"
-version: "1.0.0"
+version: "0.0.1"
 
 inputs:
   package_name:
     description: "Upstream package name used to create reverse dependency tree."
     required: true
-  exclude:
-    description: "List of packages to be excluded from testing."
+  ignore:
+    description: |
+      List of packages to be excluded from testing.
+
+      For multiple packages, separate using spaces or use multiline syntax:
+
+      ```yml
+      ignore: package1 package2
+      # or
+      ignore: >-
+        package1
+        package2
+      ```
     required: false
-  include:
+  whitelist:
     description: |
       Whitelist of packages to be included in testing.
-      When specified, `excluded` is ignored.'
+      When specified, `ignore` is not used.
       The resulting set of packages to be tested is an overlap between those
-      in the dependency tree and those defined in `include`. If you want to
+      in the dependency tree and those defined in `whitelist`. If you want to
       define additional packages, use `additional`.
+
+      For multiple packages, separate using spaces or use multiline syntax:
+
+      ```yml
+      whitelist: package1 package2
+      # or
+      whitelist: >-
+        package1
+        package2
+      ```
     required: false
-  additional:
+  include:
     description: |
       A list of additional packages not in the dependency tree to be tested.
       This is useful to test known downstream packages that have your package as
       an optional dependency hence will not show up in the dependency tree.
+
+      For multiple packages, separate using spaces or use multiline syntax:
+
+      ```yml
+      include: package1 package2
+      # or
+      include: >-
+        package1
+        package2
+      ```
     required: false
   env:
     description: |

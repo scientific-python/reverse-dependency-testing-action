@@ -11,12 +11,12 @@ packages = set()
 whitelist = False
 
 # get blacklisted packages
-excluded = os.getenv("INPUT_EXCLUDE").split(",")
+excluded = os.getenv("INPUT_IGNORE").split()
 
 # get whitelisted packages
-included = os.getenv("INPUT_INCLUDE")
+included = os.getenv("INPUT_WHITELIST")
 if included != "":
-    included.split(",")
+    included.split()
     whitelist = True
 
 # track if we can parse the line
@@ -42,9 +42,9 @@ for line in lines[:-1]:
 packages = list(packages)
 
 # add additional packages to be tested
-additional = os.getenv("INPUT_ADDITIONAL")
+additional = os.getenv("INPUT_INCLUDE")
 if additional != "":
-    packages.extend(additional.split(","))
+    packages.extend(additional.split())
 
 yml = [
     "name: base\n",
@@ -59,7 +59,7 @@ yml.extend(["  - " + package + "\n" for package in packages])
 # add additional packages to the env
 install = os.getenv("INPUT_INSTALL")
 if install != "" and not (install.endswith(".yml") or install.endswith(".yaml")):
-    yml.extend(["  - " + package + "\n" for package in install.split(",")])
+    yml.extend(["  - " + package + "\n" for package in install.split()])
 
 print("Dependency tree analysis created a following environment specification:\n")
 print(*yml)
