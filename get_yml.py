@@ -58,7 +58,7 @@ yml.extend(["  - " + package + "\n" for package in packages])
 
 # add additional packages to the env
 install = os.getenv("INPUT_INSTALL")
-if install != "" and not (install.endswith(".yml") or install.endswith(".yaml")):
+if install != "":
     yml.extend(["  - " + package + "\n" for package in install.split()])
 
 print("Dependency tree analysis created a following environment specification:\n")
