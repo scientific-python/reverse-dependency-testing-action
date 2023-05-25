@@ -47,7 +47,6 @@ if additional != "":
     packages.extend(additional.split())
 
 yml = [
-    "name: base\n",
     "channels:\n",
     "  - conda-forge\n",
     "dependencies:\n",
