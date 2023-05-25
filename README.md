@@ -20,6 +20,8 @@ with:
     package_name: mypackage
 ```
 
+### Ignore packages
+
 In some cases, you may want to ignore certain packages (since they cannot be installed or for any other reason):
 
 ```yml
@@ -28,6 +30,8 @@ with:
     package_name: mypackage
     ignore: broken_package
 ```
+
+### Select only a subset of packages
 
 Alternatively, you may run only a whitelisted subset of the dependents:
 
@@ -39,6 +43,8 @@ with:
         package1
         package2
 ```
+
+### Include additional packages
 
 Some packages you may want to test against may depend on your package only
 optionally and will not show up in the dependency tree. Those can be
@@ -53,6 +59,8 @@ with:
         package1
         package2
 ```
+
+### Specify environment
 
 You can set up the environment with dependencies required to build
 your package by passing the conda environment file:
@@ -74,24 +82,14 @@ with:
     install: package1 package2
 ```
 
-By default, the action attempts to install the package using
-`pip install .`. However, you can specify your own command:
+The default Python version installed in the environment is 3.11. You can
+override that either in your environment file or using `python_version`.
 
 ```yml
 - uses: martinfleis/reverse-dependency-testing@main
 with:
     package_name: mypackage
-    installation_command: pip install --no-deps --no-build-isolation .
-```
-
-The action returns an exit code 1 (failure) if there is at least one
-failed test. You can avoid it by setting `fail_on_failure` to `false`.
-
-```yml
-- uses: martinfleis/reverse-dependency-testing@main
-with:
-    package_name: mypackage
-    fail_on_failure: false
+    python_version: 3.9
 ```
 
 If you need to run a specific command in the docker container prior the
@@ -106,14 +104,28 @@ with:
     run: apt-get update && apt install build-essential -y
 ```
 
-The default Python version installed in the environment is 3.11. You can
-override that either in your environment file or using `python_version`.
+### Customize installation command
+
+By default, the action attempts to install the package using
+`pip install .`. However, you can specify your own command:
 
 ```yml
 - uses: martinfleis/reverse-dependency-testing@main
 with:
     package_name: mypackage
-    python_version: 3.9
+    installation_command: pip install --no-deps --no-build-isolation .
+```
+
+### Fail or pass on test failure
+
+The action returns an exit code 1 (failure) if there is at least one
+failed test. You can avoid it by setting `fail_on_failure` to `false`.
+
+```yml
+- uses: martinfleis/reverse-dependency-testing@main
+with:
+    package_name: mypackage
+    fail_on_failure: false
 ```
 
 ## How to ensure that tests are packaged?
@@ -121,7 +133,7 @@ with:
 The easiest way to ensure that the tests are packaged is to store them
 in the package folder (usually called `package_name` or `src/package_name`).
 
-```txt
+```
 mypackage
 ├── pyproject.toml
 |   README.md
