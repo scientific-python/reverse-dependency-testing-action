@@ -114,8 +114,7 @@ inputs:
     required: false
     default: "true"
   verbose:
-    description: |
-      Use verbose mode when running individual test suites.
+    description: Use verbose mode when running individual test suites.
     required: false
     default: "false"
 runs:
