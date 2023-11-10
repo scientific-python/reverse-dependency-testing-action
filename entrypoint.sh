@@ -56,8 +56,12 @@ do
     echo -e "$counter/$total: Running pytest for $package"
     echo -e "\e[95m================================================================================\n"
 
-    pytest --color yes --disable-warnings -n auto --pyargs $package ${INPUT_VERBOSE:+-v} ${INPUT_VERBOSE:-"--tb=no"}
-
+    if [ "$INPUT_VERBOSE" = "true" ]; then
+      pytest --color yes --disable-warnings -n auto --pyargs "$package" -v
+    else
+      pytest --color yes --disable-warnings -n auto --pyargs "$package" --tb=no
+    fi
+    
     # Get the exit code
     exit_code=$?
 
