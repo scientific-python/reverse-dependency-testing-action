@@ -109,6 +109,10 @@ inputs:
     description: Python version to use by default
     required: false
     default: "3.11"
+  parallel:
+    description: Run tests in parallel using pytest-xdist.
+    required: false
+    default: "true"
   verbose:
     description: |
       Use verbose mode when running individual test suites.

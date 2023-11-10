@@ -57,11 +57,11 @@ do
     echo -e "\e[95m================================================================================\n"
 
     if [ "$INPUT_VERBOSE" = "true" ]; then
-      pytest --color yes --disable-warnings -n auto --pyargs "$package" -v
+      pytest --color yes --disable-warnings ${INPUT_PARALLEL:+-n auto} --pyargs "$package" -v
     else
-      pytest --color yes --disable-warnings -n auto --pyargs "$package" --tb=no
+      pytest --color yes --disable-warnings ${INPUT_PARALLEL:+-n auto} --pyargs "$package" --tb=no
     fi
-    
+
     # Get the exit code
     exit_code=$?
 
