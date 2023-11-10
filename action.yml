@@ -94,6 +94,11 @@ inputs:
     description: Python version to use by default
     required: false
     default: "3.11"
+  verbose:
+    description: |
+      Use verbose mode when running individual test suites.
+    required: false
+    default: "false"
 runs:
   using: "docker"
   image: "Dockerfile"
