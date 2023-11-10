@@ -57,7 +57,10 @@ yml.extend(["  - " + package + "\n" for package in packages])
 
 pip_install = os.getenv("INPUT_INSTALL_PIP")
 if pip_install != "":
-    yml.extend["  - pip\n" "  - pip:\n"]
+    yml.extend[
+        "  - pip\n",
+        "  - pip:\n",
+    ]
     yml.extend(["    - " + package + "\n" for package in pip_install.split()])
 
 
