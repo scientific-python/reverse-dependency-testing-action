@@ -78,6 +78,21 @@ inputs:
         package2
       ```
     required: false
+  install_pip:
+    description: |
+      Additional packages to be installed to the environment using pip.
+      These are not tested unless they are in the dependency tree anyway.
+
+      For multiple packages, separate using spaces or use multiline syntax:
+
+      ```yml
+      install_pip: package1 package2
+      # or
+      install_pip: >-
+        package1
+        package2
+      ```
+    required: false
   installation_command:
     description: A command used to install the package from the repository
     required: false
