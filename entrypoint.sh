@@ -57,7 +57,7 @@ do
     echo -e "\e[95m================================================================================\n"
 
     if [ "$INPUT_VERBOSE" = "true" ]; then
-      pytest --color yes --disable-warnings ${INPUT_PARALLEL:+-n auto} --pyargs "$package" -v
+      pytest --color yes --disable-warnings ${INPUT_PARALLEL:true:+-n auto} --pyargs "$package" -v
     else
       pytest --color yes --disable-warnings --pyargs "$package" --tb=no
     fi
