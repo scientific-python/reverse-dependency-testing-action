@@ -43,6 +43,7 @@ total=${#packages_array[@]}
 
 # Declare variables for each category
 passed=""
+xfailed=""
 failed=""
 no_tests=""
 
@@ -75,6 +76,8 @@ do
 
     if [ $exit_code -eq 0 ]; then
         passed+="$package, "
+    elif [ $exit_code -eq 1 ] && [[ "$INPUT_XFAIL" =~ (^|[[:space:]])"$package"($|[[:space:]]) ]]; then
+        xfailed+="$package, "
     elif [ $exit_code -eq 1 ]; then
         failed+="$package, "
     elif [ $exit_code -eq 5 ]; then
@@ -86,8 +89,9 @@ done
 # Print the summary
 echo -e "\n\e[1m\e[35m======================= reverse dependency tests summary ======================="
 echo -e "\e[32mPASSED: \e[0m${passed%, }"
+echo -e "\e[33mXFAILED: \e[0m${passed%, }"
 echo -e "\e[31mFAILED: \e[0m${failed%, }"
-echo -e "\e[33mNO TESTS COLLECTED: \e[0m${no_tests%, }"
+echo -e "\e[37mNO TESTS COLLECTED: \e[0m${no_tests%, }"
 
 # check if failed is not empty and FAIL is true
 if [[ -n "$failed" && "$INPUT_FAIL_ON_FAILURE" == "true" ]]; then

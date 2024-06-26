@@ -102,6 +102,20 @@ inputs:
       Fail the action if there is a failure in any of the tests.
     required: false
     default: "true"
+  xfail:
+    description: |
+      List packages which can fail without failing the action.
+
+      For multiple packages, separate using spaces or use multiline syntax:
+
+      ```yml
+      xfail: package1 package2
+      # or
+      xfail: >-
+        package1
+        package2
+      ```
+    required: false
   run:
     description: Command to run prior doing anything else within the micromamba docker.
     required: false
