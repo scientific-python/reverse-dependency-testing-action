@@ -89,7 +89,7 @@ done
 # Print the summary
 echo -e "\n\e[1m\e[35m======================= reverse dependency tests summary ======================="
 echo -e "\e[32mPASSED: \e[0m${passed%, }"
-echo -e "\e[33mXFAILED: \e[0m${passed%, }"
+echo -e "\e[33mXFAILED: \e[0m${xfailed%, }"
 echo -e "\e[31mFAILED: \e[0m${failed%, }"
 echo -e "\e[37mNO TESTS COLLECTED: \e[0m${no_tests%, }"
 
