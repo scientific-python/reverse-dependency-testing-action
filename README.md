@@ -73,7 +73,7 @@ with:
 ```
 
 Alternatively, (or additionally) you can specify packages to be installed
-in the environment in the `install` input:
+in the environment with conda in the `install` input:
 
 ```yml
 - uses: scientific-python/reverse-dependency-testing@main
@@ -81,6 +81,16 @@ with:
     package_name: mypackage
     install: package1 package2
 ```
+
+Or with pip using `install_pip` input:
+
+```yml
+- uses: scientific-python/reverse-dependency-testing@main
+with:
+    package_name: mypackage
+    install_pip: package1 package2
+```
+
 
 The default Python version installed in the environment is 3.11. You can
 override that either in your environment file or using `python_version`.
@@ -127,6 +137,18 @@ with:
     package_name: mypackage
     fail_on_failure: false
 ```
+
+### XFail package tests
+
+You can allow some packages to fail without failing the whole action.
+
+```yml
+- uses: scientific-python/reverse-dependency-testing@main
+with:
+    package_name: mypackage
+    xfail: package1 package2
+```
+
 
 ## How to ensure that tests are packaged?
 
